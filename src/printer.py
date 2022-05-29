@@ -54,11 +54,14 @@ class RecieptPrinter():
         id = re.findall("...[0-9a-f]:[0-9a-f]...", lsusb_text, flags=re.IGNORECASE)[0]
         return id.split(":") 
         
-    def print_images(self, images_dir: str) -> None:    
+    def print_images(self, images_dir: str, cut_between_images: bool) -> None:    
         p = Usb(int(self.vendor_id, 16), int(self.product_id, 16))
         
         for path in sorted(os.listdir(images_dir)): 
             p.image(images_dir + "/" + path)
+            
+            if cut_between_images:
+                p.cut()
         
         p.cut()
         
