@@ -12,7 +12,7 @@ def resize_all_images(images_dir: str, width: int):
 def fit_width(image: Image, width: int) -> Image:
     # Resize image to fit width.
 
-    if image.height > image.width:
+    if image.width > image.height:
         image = image.rotate(90, expand=1)
 
     wpercent = (width / float(image.width))
